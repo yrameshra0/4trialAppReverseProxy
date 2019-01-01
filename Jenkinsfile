@@ -8,7 +8,7 @@ pipeline {
             steps {
                 echo 'Pulling...' + env.BRANCH_NAME
                 sh """
-                docker build -t ${env.SWARM_SERVICE_NAME}:${env.BUILD_NUMBER} .
+                docker build -t ${env.SWARM_SERVICE_NAME}:${env.GIT_COMMIT} .
                 """
             }
         }    
