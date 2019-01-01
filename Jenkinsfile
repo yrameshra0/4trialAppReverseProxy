@@ -8,6 +8,7 @@ pipeline {
             step {
                 echo 'Pulling...' + env.BRANCH_NAME
                 docker build -t app_rev_proxy .
-        }
-    } 
+            }
+        }    
+    }
 }
