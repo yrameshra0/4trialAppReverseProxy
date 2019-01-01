@@ -1,5 +1,5 @@
 pipeline {
-    agent { any }
+    agent any
     environment {
         SWARM_SERVICE_NAME = 'app_rev_proxy'
     }
