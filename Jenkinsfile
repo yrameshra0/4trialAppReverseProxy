@@ -5,7 +5,7 @@ pipeline {
     }
     stages {
         stage('Build with unit testing') {
-            step {
+            steps {
                 echo 'Pulling...' + env.BRANCH_NAME
                 sh """
                 docker build -t ${env.SWARM_SERVICE_NAME}:${env.BUILD_NUMBER} .
