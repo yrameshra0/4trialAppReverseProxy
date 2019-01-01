@@ -7,11 +7,11 @@ pipeline {
         stage('Build with unit testing') {
             step {
                 echo 'Pulling...' + env.BRANCH_NAME
-                docker build -t app_rev_proxy:${BUILD_NUMBER} .
+                docker build -t app_rev_proxy:env.BUILD_NUMBER} .
             }
             step {
                 echo 'Verifying docker swarm service...' + env.SWARM_SERVICE_NAME
-                if docker service ls --format "{{.Name}}" | grep -q ${SWARM_SERVICE_NAME}
+                if docker service ls --format "{{.Name}}" | grep -q env.BUILD_NUMBER
                 then 
                     echo "SERVICE ALREADY CREATED | OK";
                 else
