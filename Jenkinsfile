@@ -7,7 +7,7 @@ pipeline {
         stage('Build with unit testing') {
             step {
                 echo 'Pulling...' + env.BRANCH_NAME
-                docker build -t app_rev_proxy:env.BUILD_NUMBER} .
+                docker build -t app_rev_proxy .
             }
             step {
                 echo 'Verifying docker swarm service...' + env.SWARM_SERVICE_NAME
