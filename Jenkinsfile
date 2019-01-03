@@ -16,7 +16,7 @@ pipeline {
         stage('Update test swarm') {
             steps {
                 sh """
-                if docker service ls --format "{{.Name}}" | grep -q ${env.SWARM_SERVICE_NAME}
+                if docker service ls --format "{{.Name}}" | grep -q 'root_jenkins'
                 then 
                     echo "SERVICE ALREADY CREATED | OK";
                 else
