@@ -13,16 +13,30 @@ pipeline {
             }
         }  
 
-        stage('Update test swarm') {
+        stage('Update TEST swarm') {
             steps {
                 sh """
-                if docker service ls --format "{{.Name}}" | grep -q 'root_jenkins'
-                then 
-                    echo "SERVICE ALREADY CREATED | OK";
-                else
-                    echo "SERVICE NOT CREATED OK | NOT OK";
-                fi
+                docker service create \
+                --publish-add published=12000,target=80 \
+                --replicas 1 \
+                --name test_${SWARM_SERVICE_NAME} \
+                --update-delay 10s \
+                --network test \
+                ${env.SWARM_SERVICE_NAME}:${env.GIT_COMMIT}
+                """
+            }
+        }    
 
+        stage('Update PROD swarm') {
+            steps {
+                sh """
+                docker service create \
+                --publish-add published=12000,target=80 \
+                --replicas 1 \
+                --name test_${SWARM_SERVICE_NAME} \
+                --update-delay 10s \
+                --network prod \
+                ${env.SWARM_SERVICE_NAME}:${env.GIT_COMMIT}
                 """
             }
         }    
