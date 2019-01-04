@@ -17,7 +17,7 @@ pipeline {
             steps {
                 sh """
                 docker service create \
-                --publish-add published=12000,target=80 \
+                --publish 12000:80 \
                 --replicas 1 \
                 --name test_${SWARM_SERVICE_NAME} \
                 --update-delay 10s \
@@ -31,7 +31,7 @@ pipeline {
             steps {
                 sh """
                 docker service create \
-                --publish-add published=12000,target=80 \
+                --publish 11000:80 \
                 --replicas 1 \
                 --name test_${SWARM_SERVICE_NAME} \
                 --update-delay 10s \
