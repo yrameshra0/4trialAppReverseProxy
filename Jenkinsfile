@@ -15,11 +15,8 @@ pipeline {
 
         stage('Update TEST swarm') {
             steps {
-                sh """
-                docker service rm test_${SWARM_SERVICE_NAME}
-                """
-            }
-            steps {
+                sh """docker service rm test_${SWARM_SERVICE_NAME}"""
+
                 sh """
                 docker service create \
                 --publish 12000:80 \
@@ -34,11 +31,8 @@ pipeline {
 
         stage('Update PROD swarm') {
             steps {
-                sh """
-                docker service rm prod_${SWARM_SERVICE_NAME}
-                """
-            }
-            steps {
+                sh """docker service rm prod_${SWARM_SERVICE_NAME}"""
+
                 sh """
                 docker service create \
                 --publish 11000:80 \
