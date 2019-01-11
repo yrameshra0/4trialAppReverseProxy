@@ -14,6 +14,7 @@ pipeline {
             steps {
                 sh """
                 docker service update \
+                --publish-add published=11000,target=80 \
                 --replicas 1 \
                 --update-delay 10s \
                 --image ${env.SWARM_SERVICE_NAME}:${env.GIT_COMMIT} \
@@ -26,6 +27,7 @@ pipeline {
             steps {
                 sh """
                 docker service update \
+                --publish-add published=12000,target=80 \
                 --replicas 1 \
                 --update-delay 10s \
                 --image ${env.SWARM_SERVICE_NAME}:${env.GIT_COMMIT} \
